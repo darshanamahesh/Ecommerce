@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+      {% if category %}
+            {{category.description|truncatewords:155 }}
+      {% else %}
+           Welcome To Best Supermarket, were we can buy different brand items....
+      {% endif %}
+{% endblock %}
+{% block title %}
+ {% if category %}
+            {{category.name}} - ABC Store
+      {% else %}
+         see our collections
+      {% endif %}
+
+{% endblock %}
+
+{% block content %}
+ {% if category %}
+<div>
+  <div class="row my_row_class">
+      <div class="mx-auto">
+
+
+    <p><a href="{% url 'shop:allProdCat' %}">our product collection</a></p>
+  </div>
+</div>
+    {% endif %}
+<div class="mx-auto">
+   {% if category %}
+  <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
+
+</div>
+<br>
+<div>
+  <h1 class="text-center my_title">
+    {{category.name}}
+  </h1>
+  <p class="test-justify">{{category.description}}</p>
+</div>
+
+{% else %}
+<div>
+<img class="my_image my_image_padding" src="{% static 'img/banner.png' %}" alt="our products">
+</div>
+<br>
+<div>
+  <h1 class="text-center my_title">Our product collection</h1>
+  <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</div>
+{% endif %}
+<div class="container">
+    <div class="row mx-auto">
+        {% for product in products.object_list %}
+    <div class="my_bottom_margin col-9 col-sm-12  col-md-12 col-lg-4">
+        <div class="card text-center" style="min-width:18rem;">
+        <a href={{product.get_url}}"><img class="card-img-top my_image" src="{{product.image.url}}" alt="productname"></a>
+        <div class="card-body">
+            <h4>{{product.name}}</h4>
+            <p> {{product.price}}</p>
+    </div>
+</div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}
+
+</div>
