@@ -17,7 +17,7 @@
         <h1 class="text-center my_title">  Your Shopping Cart is empty</h1>
     <br>
         <p class="text-center">
-            Please click<a href="{% url 'shop:allProdCart' %}" >Here </a> to continue shopping...
+            Please click<a href="{% url 'shop:allProdCat' %}" >Here </a> to continue shopping...
 
         </p>
 
@@ -29,7 +29,7 @@
 <div>
 <div class="text-center">
 <br>
-    <h1 class="text-centermy_title">
+    <h1 class="text-center my_title">
         Your Shopping Cart
     </h1>
     <br>
@@ -48,20 +48,20 @@
             {% for cart_item in cart_items %}
             <tr>
                 <td>
-                    <a href="cart_item.product.get_absolute_url"><img src="{{cart_item.product.url}}" alt="image" class="float-left rounded custom_image"</a>
+                    <a href="{{ cart_item.product.get_absolute_url }}"><img src="{{ cart_item.product.image.url }}" alt="image" class="float-left rounded custom_image"></a>
                 </td>
                 <td class="text-lef">
-                    {{cart_item.product.name}}
+                    {{ cart_item.product.name }}
                     <br>
-                    SKU: {{cart_item_product.id}}
+                    SKU: {{ cart_item_product.id }}
                     <br>
-                    Price: Rs. {{cart_item.product.price}}
+                    Price: Rs. {{ cart_item.product.price }}
                     <br>
-                    Qty: {{cart_item.quantity}} x Rs. {{cart_item}}
+                    Qty: {{ cart_item.quantity }} x Rs. {{ cart_item }}
 
                 </td>
                 <td>
-                    rs {{cart_item.sub_total}}
+                    Rs. {{ cart_item.sub_total }}
                 </td>
                 {% if cart_item.quantity < cart_item.product.stock %}
                 <td>
@@ -76,6 +76,7 @@
 
                 </td>
             </tr>
+            {% endif %}
             {% endfor %}
         </table>
     <div class="col-12 col-sm-12 col-md12 col-lg-12 col-lg-6 text-center">
@@ -89,7 +90,7 @@
         </thead>
         <tbody>
         <tr>
-            <td>Please review you shopping cart items before proceesding with order payment</td>
+            <td>Please review you shopping cart items before proceeding with order payment</td>
         </tr>
         </tbody>
     </table>

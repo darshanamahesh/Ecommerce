@@ -5,9 +5,17 @@ from shop.models import Product
 
 
 def SearchResult(request, q=None):
-    product = None
     query = None
-    if q in request.GET:
+    product = None
+
+    if 'q' in request.GET:
         query = request.GET.get('q')
-        product = Product.objects.all().filter(Q(name__contains=query) | Q(description__contains=query))
-        return render(request, 'search.html', {'query': query, 'product': product})
+        product = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    context = {
+        'query': query,
+        'product': product
+    }
+
+    return render(request, 'search.html', context)
+

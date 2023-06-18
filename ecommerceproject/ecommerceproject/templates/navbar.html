@@ -24,13 +24,13 @@
         </li>
         {%if item_count > 0 %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'cart:cart_detail' %}" tabindex="-1" aria-disabled="true"><i class="fa fa-shopping-cart" >{{item_count}}</i><</a>
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}" tabindex="-1" aria-disabled="true"><i class="fa fa-shopping-cart" >{{item_count}}</i></a>
         </li>
         {% endif %}
       </ul>
       <form class="d-flex" action="{% url 'search_app:SearchResult' %}" method="get">
         {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2" type="search" placeholder="Search" name ="q" aria-label="Search">
         <button class="btn btn-outline-success" type="submit"><i class="fa fa-search" ></i></button>
       </form>
     </div>
